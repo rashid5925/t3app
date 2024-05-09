@@ -1,21 +1,18 @@
 import * as React from "react";
-
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image";
 
 export default function CardUI({ data }) {
   return (
-    <Card className="w-[320px]">
+    <Card className="w-[280px]">
       <CardHeader>
         {data.has_accepted_answer ? (
           <div className="flex justify-center">
