@@ -8,8 +8,9 @@ const Home = () => {
   useEffect(() => {
     const getCardData = async () => {
       const response = await fetch(
-        "https://meta.discourse.org/c/documentation/devs/56/l/top.json?ascending=false&page=1&per_page=8"
-      );
+        "/documentation/devs/56/l/top.json", {
+          mode: 'no-cors'
+        });
       let data = await response.json();
       data = data["topic_list"]["topics"];
       setCardData(data);
@@ -21,7 +22,7 @@ const Home = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
         {cardData.length > 0 ? 
         cardData.map(
-          (data) => <CardUI data={data} /> 
+          (data) => <CardUI key={data.id} data={data} /> 
         )
         : <Spinner />}
       </div>
