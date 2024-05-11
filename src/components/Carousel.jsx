@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -19,23 +18,23 @@ export default function CarouselBottom() {
       className="w-full"
     >
       <CarouselContent className="mb-1">
-        <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+        <CarouselItem className="basis-1/2 md:basis-1/3 ">
           <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
             <div className="flex justify-around items-center py-2">
               <Image
                 src={"/icons/music_note.svg"}
-                width={60}
-                height={60}
+                width={55}
+                height={55}
                 alt="music note"
               />
               <Image
                 src={"/icons/stopwatch.svg"}
-                width={60}
-                height={60}
+                width={55}
+                height={55}
                 alt="stopwatch"
               />
             </div>
-            <div className="flex justify-center items-center py-2">
+            <div className="flex justify-center items-center py-3">
               <Image
                 src={"/icons/speaker.svg"}
                 width={60}
@@ -45,54 +44,54 @@ export default function CarouselBottom() {
             </div>
           </div>
         </CarouselItem>
-        <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+        <CarouselItem className="basis-1/2 md:basis-1/3 ">
           <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
             <div className="flex justify-around items-center py-2">
               <Image
-                src={"/icons/music_note.svg"}
-                width={60}
-                height={60}
-                alt="music note"
+                src={"/icons/todo.svg"}
+                width={62}
+                height={62}
+                alt="to do list"
               />
               <Image
-                src={"/icons/stopwatch.svg"}
-                width={60}
-                height={60}
-                alt="stopwatch"
+                src={"/icons/notes.svg"}
+                width={62}
+                height={62}
+                alt="notes"
               />
             </div>
-            <div className="flex justify-center items-center py-2">
+            <div className="flex justify-center items-center py-4">
               <Image
-                src={"/icons/speaker.svg"}
-                width={60}
-                height={60}
-                alt="speaker"
+                src={"/icons/group.svg"}
+                width={70}
+                height={70}
+                alt="group"
               />
             </div>
           </div>
         </CarouselItem>
-        <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+        <CarouselItem className="basis-1/2 md:basis-1/3 ">
           <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
             <div className="flex justify-around items-center py-2">
               <Image
-                src={"/icons/music_note.svg"}
+                src={"/icons/eye_open.svg"}
                 width={60}
                 height={60}
-                alt="music note"
+                alt="eye open"
               />
               <Image
-                src={"/icons/stopwatch.svg"}
+                src={"/icons/setting.svg"}
                 width={60}
                 height={60}
-                alt="stopwatch"
+                alt="setting"
               />
             </div>
-            <div className="flex justify-center items-center py-2">
+            <div className="flex justify-center items-center py-3">
               <Image
-                src={"/icons/speaker.svg"}
-                width={60}
-                height={60}
-                alt="speaker"
+                src={"/icons/broadcast.svg"}
+                width={80}
+                height={80}
+                alt="broadcast"
               />
             </div>
           </div>
