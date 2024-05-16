@@ -139,7 +139,7 @@ export default function CarouselAsk() {
         </CarouselItem>
         {camera
           ? Array.from(Array(7).keys()).map((i) => (
-              <CarouselItem className="basis-1/2 md:basis-1/3 ">
+              <CarouselItem key={i} className="basis-1/2 md:basis-1/3 ">
                 <div
                   style={{ backgroundImage: `url(/images/slide-${i + 1}.jpg)` }}
                   className="p-1 pt-8 bg-no-repeat bg-center bg-cover h-[6.3rem] rounded-md"
