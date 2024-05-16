@@ -39,10 +39,10 @@ export default function MusicCarousel() {
           {data
             .filter((item) => item.group === "Locations")
             .map((item, i) => (
-              <div className="p-1 flex flex-col">
+              <div className="p-1 flex flex-col" key={i}>
                 <div className="flex justify-around items-center">
                   <CarouselItem className="basis-1/2 md:basis-1/3 ">
-                    <CardMusic key={i} data={item} />
+                    <CardMusic data={item} />
                   </CarouselItem>
                 </div>
               </div>
@@ -60,10 +60,10 @@ export default function MusicCarousel() {
           {data
             .filter((item) => item.group === "Background")
             .map((item, i) => (
-              <div className="p-1 flex flex-col">
+              <div className="p-1 flex flex-col" key={i}>
                 <div className="flex justify-around items-center">
                   <CarouselItem className="basis-1/2 md:basis-1/3 ">
-                    <CardMusic key={i} data={item} />
+                    <CardMusic data={item} />
                   </CarouselItem>
                 </div>
               </div>
@@ -81,10 +81,10 @@ export default function MusicCarousel() {
           {data
             .filter((item) => item.group === "Tweak")
             .map((item, i) => (
-              <div className="p-1 flex flex-col">
+              <div className="p-1 flex flex-col" key={i}>
                 <div className="flex justify-around items-center">
                   <CarouselItem className="basis-1/2 md:basis-1/3 ">
-                    <CardMusic key={i} data={item} />
+                    <CardMusic data={item} />
                   </CarouselItem>
                 </div>
               </div>
@@ -102,10 +102,10 @@ export default function MusicCarousel() {
           {data
             .filter((item) => item.group.toLowerCase() === "color noise")
             .map((item, i) => (
-              <div className="p-1 flex flex-col">
+              <div className="p-1 flex flex-col" key={i}>
                 <div className="flex justify-around items-center">
                   <CarouselItem className="basis-1/2 md:basis-1/3 ">
-                    <CardMusic key={i} data={item} />
+                    <CardMusic data={item} />
                   </CarouselItem>
                 </div>
               </div>
@@ -123,10 +123,10 @@ export default function MusicCarousel() {
           {data
             .filter((item) => item.group === "Others")
             .map((item, i) => (
-              <div className="p-1 flex flex-col">
+              <div className="p-1 flex flex-col" key={i}>
                 <div className="flex justify-around items-center">
                   <CarouselItem className="basis-1/2 md:basis-1/3 ">
-                    <CardMusic key={i} data={item} />
+                    <CardMusic data={item} />
                   </CarouselItem>
                 </div>
               </div>
@@ -144,10 +144,10 @@ export default function MusicCarousel() {
           {data
             .filter((item) => item.group === "ASMR")
             .map((item, i) => (
-              <div className="p-1 flex flex-col">
+              <div className="p-1 flex flex-col" key={i}>
                 <div className="flex justify-around items-center">
                   <CarouselItem className="basis-1/2 md:basis-1/3 ">
-                    <CardMusic key={i} data={item} />
+                    <CardMusic data={item} />
                   </CarouselItem>
                 </div>
               </div>
