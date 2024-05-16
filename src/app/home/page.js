@@ -6,7 +6,7 @@ import TextPopover from "@/components/TextPopover";
 import Sidebar from "@/components/Sidebar";
 import LocationMenu from "@/components/LocationMenu";
 import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import {
   QueryClient, 
   QueryClientProvider,
@@ -18,7 +18,6 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTextWidth } from "@fortawesome/free-solid-svg-icons";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import { Button } from "@/components/ui/button";
 import { signOut } from "firebase/auth";
@@ -34,11 +33,6 @@ const Home = () => {
   const router = useSearchParams();
   const mode = router.get("mode");
   const contols = router.get("controls");
-  const [user] = useAuthState(auth);
-  const rout = useRouter();
-  if (!user) {
-    rout.push("/");
-  }
 
   const handleInfiniteScroll = async () => {
     try {

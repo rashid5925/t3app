@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
 import { faRecordVinyl } from "@fortawesome/free-solid-svg-icons";
@@ -14,8 +14,6 @@ import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { Rnd } from "react-rnd";
 import ChatPopover from "@/components/ChatPopover";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
 
 const Show = () => {
   const router = useSearchParams();
@@ -25,11 +23,7 @@ const Show = () => {
   const [image, setImage] = useState(false);
   const [timer, setTimer] = useState(3);
   const [status, setStatus] = useState(0);
-  const [user] = useAuthState(auth);
-  const rout = useRouter();
-  if (!user) {
-    rout.push("/");
-  }
+
   useEffect(() => {
     let interval = null;
     if (status == 1) {

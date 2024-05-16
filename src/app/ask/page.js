@@ -5,15 +5,13 @@ import LocationMenu from "@/components/LocationMenu";
 import CarouselAsk from "@/components/CarouselAsk";
 import CarouselUsers from "@/components/CarouselUsers";
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Avatar } from "@readyplayerme/visage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
 import { faRecordVinyl } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
 
 const modelSrc = "https://readyplayerme.github.io/visage/male.glb";
 
@@ -22,8 +20,6 @@ const Ask = () => {
   const mode = router.get("mode");
   const [timer, setTimer] = useState(3);
   const [status, setStatus] = useState(0);
-  const [user] = useAuthState(auth);
-  const rout = useRouter();
   
   useEffect(() => {
     let interval = null;
@@ -43,9 +39,7 @@ const Ask = () => {
       clearInterval(interval);
     };
   }, [status]);
-  if (!user) {
-    rout.push("/");
-  }
+
   if (mode == "vid") {
     return <AskVid />;
   }
