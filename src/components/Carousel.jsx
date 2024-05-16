@@ -49,7 +49,7 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
       className="w-[90%]"
     >
       <CarouselContent className="mb-1">
-        <CarouselItem className="basis-1/2 md:basis-1/3 ">
+        <CarouselItem className="basis-1/2 md:basis-1/3 " key={555555}>
           <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
             {joined ? <h3>Name</h3> : ""}
             <div className="flex justify-around items-center py-2">
@@ -100,7 +100,7 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
             </div>
           </div>
         </CarouselItem>
-        <CarouselItem className="basis-1/2 md:basis-1/3 ">
+        <CarouselItem className="basis-1/2 md:basis-1/3" key={5555551}>
           <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
             <div className="flex justify-around items-center py-2">
               <TodoPopover>
@@ -142,7 +142,7 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
             </div>
           </div>
         </CarouselItem>
-        <CarouselItem className="basis-1/2 md:basis-1/3 ">
+        <CarouselItem className="basis-1/2 md:basis-1/3" key={555553}>
           <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
             <div className="flex justify-around items-center py-2">
               <Image
