@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   Card,
   CardContent,
@@ -7,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 
 export default function CardUI({ data }) {

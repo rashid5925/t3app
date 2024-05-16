@@ -1,127 +1,139 @@
 "use client";
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 import {
-  QueryClient,
-  QueryClientProvider,
-  useInfiniteQuery,
-} from "@tanstack/react-query";
-import CardUI from "@/components/Card";
-import CarouselBottom from "@/components/Carousel";
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import { auth } from "@/app/firebase/config";
 import Spinner from "@/components/Spinner";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import LocationMenu from "@/components/LocationMenu";
-import Sidebar from "@/components/Sidebar";
+import { useRouter } from "next/navigation";
 
-const Home = () => {
-  const [arrow, setArrow] = useState("top");
-  const [isLoading, setIsLoading] = useState(false);
+export default function Page() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const [user] = useAuthState(auth);
+  if (user) {
+    router.push("/home?mode=embed&controls=true");
+  }
 
-  const handleInfiniteScroll = async () => {
+  const handleGoogleSignin = async () => {
+    setLoading(true);
     try {
-      const d = document.documentElement;
-      const offset = d.scrollTop + window.innerHeight;
-      const height = d.offsetHeight;
-      if (offset === height) {
-        fetchNextPage();
+      const res = await signInWithGoogle();
+      if (res.user) {
+        setEmail("");
+        setPassword("");
+        router.push("/home?mode=embed&controls=true");
+      } else {
+        alert("Cannot login");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      alert("Cannot login");
+      console.log(e);
     }
+    setLoading(false);
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleInfiniteScroll);
-    return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, []);
-
-  const getCardData = async (page) => {
-    console.log(arrow);
-    const url = `/c/documentation/devs/56/l/${arrow}.json?ascending=false&page=${page}&per_page=8`;
-    const response = await fetch(url, {
-      mode: "no-cors",
-    });
-    let data = await response.json();
-    const offset = data["topic_list"]["more_topics_url"]
-      ? parseInt(data["topic_list"]["more_topics_url"].split("=")[2])
-      : 1;
-    data = data["topic_list"]["topics"];
-    setIsLoading(false);
-    return { data, offset };
-  };
-  const { data, error, fetchNextPage, refetch, isFetching, status } =
-    useInfiniteQuery({
-      queryKey: ["topics"],
-      queryFn: async ({ pageParam = 1 }) => {
-        const response = await getCardData(pageParam);
-        return response;
-      },
-      getNextPageParam: (_, pages) => {
-        if (pages[[pages.length - 1]].offset > 1) {
-          return pages[pages.length - 1].offset;
+  const handleSignin = async () => {
+    setLoading(true);
+    try {
+      if (email != "" && password != "") {
+        const res = await signInWithEmailAndPassword(email, password);
+        if (res.user) {
+          setEmail("");
+          setPassword("");
+          router.push("/home?mode=embed&controls=true");
+        } else {
+          alert("Incorrect email or password");
         }
-      },
-    });
-
-  const toggleArrow = async () => {
-    await setArrow(arrow === "top" ? "latest" : "top");
-    setIsLoading(true);
-    refetch({ refetchPage: (page, index) => index === 0 });
+      } else {
+        alert("Fill all fields");
+      }
+    } catch (e) {
+      alert("Incorrect email or password");
+      console.log(e);
+    }
+    setLoading(false);
   };
-
+  if (loading) {
+    return <Spinner />;
+  }
   return (
-    <div className="m-5 flex flex-col items-center">
-      <div className="flex flex-col gap-7 fixed top-10 right-10">
-        <Image
-          src={`/icons/${arrow === "top" ? "up" : "down"}.svg`}
-          width={40}
-          height={40}
-          alt="up"
-          priority
-          className="cursor-pointer"
-          onClick={toggleArrow}
-        />
-        <LocationMenu />
-        <Sidebar />
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {status === "success" && !isLoading ? (
-          <>
-            {data.pages.map((page, i) => (
-              <React.Fragment key={i}>
-                {page.data.map((d) => (
-                  <CardUI key={d.id} data={d} />
-                ))}
-              </React.Fragment>
-            ))}
-            {isFetching && data.pages[[data.pages.length - 1]].offset > 1 ? (
-              <Spinner />
-            ) : (
-              <></>
-            )}
-          </>
-        ) : status === "error" ? (
-          <p>Error: {error.message}</p>
-        ) : (
-          <Spinner />
-        )}
-      </div>
-      <div className="flex w-full justify-center opacity-50 fixed bottom-0">
-        <CarouselBottom />
-      </div>
+    <div className="flex w-full h-screen justify-center items-center">
+      <Card className="mx-auto max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>
+            Enter your email below to login to your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+                <Link
+                  href="#"
+                  className="ml-auto inline-block text-sm underline"
+                >
+                  Forgot your password?
+                </Link>
+              </div>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <Button type="submit" onClick={handleSignin} className="w-full">
+              Login
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleGoogleSignin}
+              className="w-full"
+            >
+              Login with Google
+            </Button>
+          </div>
+          <div className="mt-4 text-center text-sm">
+            Don&apos;t have an account?{" "}
+            <Link href="/signup" className="underline">
+              Sign up
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
-};
-
-const queryClient = new QueryClient();
-
-const Page = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Home />
-    </QueryClientProvider>
-  );
-};
-
-export default Page;
-
-// export default Home;
+}

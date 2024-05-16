@@ -1,27 +1,7 @@
+"use client";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import {
-  ActionIcon,
-  ChatInputActionBar,
-  MobileChatInputArea,
-  MobileChatSendButton,
-  ChatInputArea,
-  ChatSendButton,
-  TokenTag,
-  ChatList,
-  useControls,
-  useCreateStore,
-} from "@lobehub/ui";
+import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { ChatInputActionBar, MobileChatInputArea, MobileChatSendButton, TokenTag, ChatList, useControls, useCreateStore } from "@lobehub/ui";
 
 const data = [
   {
