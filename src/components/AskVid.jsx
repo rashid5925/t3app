@@ -96,7 +96,7 @@ const AskVid = () => {
       <div>
         <ExcaliCanvas height="94vh" width="97vw" />
       </div>
-      <div className="flex w-full justify-center fixed w-screen h-screen bottom-0 z-30">
+      <div className="flex w-full justify-center fixed w-screen h-screen bottom-0 z-30" style={{ pointerEvents: "none" }}>
         {typeof window !== 'undefined' ?
         <Rnd
           style={{
@@ -105,6 +105,7 @@ const AskVid = () => {
             justifyContent: "center",
             border: "solid 1px #ddd",
             background: "#f0f0f0",
+            pointerEvents: "all",
           }}
           onDragStop={() => setDrag(true)}
           default={{

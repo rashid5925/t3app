@@ -77,7 +77,7 @@ const PerviewOverlay = () => {
       <div className="z-0">
         <ExcaliCanvas height="94vh" width="97vw" />
       </div>
-      <div className="flex w-full justify-center fixed w-screen h-screen bottom-0 z-10">
+      <div className="flex w-full justify-center fixed w-screen h-screen bottom-0 z-10" style={{ pointerEvents: "none" }}>
         {typeof window !== 'undefined' ?
         <Rnd
           style={{
@@ -86,6 +86,7 @@ const PerviewOverlay = () => {
             justifyContent: "center",
             border: "solid 1px #ddd",
             background: "#f0f0f0",
+            pointerEvents: "all",
           }}
           default={{
             x: 0,

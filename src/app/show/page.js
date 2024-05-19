@@ -186,6 +186,7 @@ const Show = () => {
           className={`flex w-full justify-center ${
             mode == "video" ? "" : "fixed"
           } w-screen h-screen bottom-0 z-30`}
+          style={{ pointerEvents: "none" }}
         >
           {typeof window !== 'undefined' ? 
           <Rnd
@@ -195,6 +196,7 @@ const Show = () => {
               justifyContent: "center",
               border: "solid 1px #ddd",
               background: "#f0f0f0",
+              pointerEvents: "all",
             }}
             default={{
               x: 0,
