@@ -109,7 +109,7 @@ const AskVid = () => {
           onDragStop={() => setDrag(true)}
           default={{
             x: 0,
-            y: size.height - 200,
+            y: window.innerHeight - 200,
             width: 320,
             height: 200,
           }}

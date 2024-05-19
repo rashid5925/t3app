@@ -19,7 +19,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTextWidth } from "@fortawesome/free-solid-svg-icons";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "@/lib/auth";
-import { useWindowSize } from "@/lib/windowSize";
 
 let howToTag = false;
 
@@ -32,7 +31,6 @@ const Home = () => {
   const router = useSearchParams();
   const mode = router.get("mode");
   const contols = router.get("controls");
-  const size = useWindowSize();
   const rout = useRouter();
   const user = useUser();
 
