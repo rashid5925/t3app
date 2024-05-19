@@ -25,9 +25,9 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const router = useRouter();
   const [user] = useAuthState(auth);
   if (user) {
     router.push("/home?mode=embed&controls=true");

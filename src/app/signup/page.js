@@ -24,6 +24,9 @@ export default function Page() {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const [signInWithGithub] = useSignInWithGithub(auth);
+  if (user) {
+    router.push("/home?mode=embed&controls=true")
+  }
 
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);

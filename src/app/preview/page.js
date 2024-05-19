@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRecordVinyl } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
@@ -8,13 +8,19 @@ import ExcaliCanvas from "@/components/excalidraw/ExcaliCanvas";
 import { Rnd } from "react-rnd";
 import PerviewOverlay from "@/components/PreviewOverlay";
 import PreviewVideo from "@/components/PreviewVideo";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/app/firebase/config";
 
 const Preview = () => {
   const router = useSearchParams();
   const mode = router.get("mode");
   const [timer, setTimer] = useState(3);
   const [status, setStatus] = useState(0);
+  const rout = useRouter();
+  const [user] = useAuthState(auth);
+  if (!user) {
+    rout.push("/");
+  }
   useEffect(() => {
     let interval = null;
     if (status == 1) {

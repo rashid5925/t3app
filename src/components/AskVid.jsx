@@ -31,7 +31,7 @@ const AskVid = () => {
   }, [status]);
   return (
     <div className="m-5 min-h-screen flex flex-col items-center">
-      <div className="flex flex-col gap-7 fixed top-10 right-10 z-20">
+      <div className="flex flex-col gap-7 fixed top-10 right-10 z-50">
         <Image
           src={"/icons/pause.svg"}
           width={30}
@@ -93,7 +93,7 @@ const AskVid = () => {
           />
         )}
       </div>
-      <div className="z-0">
+      <div>
         <ExcaliCanvas height="94vh" width="97vw" />
       </div>
       <div className="flex w-full justify-center fixed w-screen h-screen bottom-0 z-30">

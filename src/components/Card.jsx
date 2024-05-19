@@ -11,7 +11,7 @@ import Image from "next/image";
 
 export default function CardUI({ data }) {
   return (
-    <Card className="w-[280px]">
+    <Card className="w-[280px] border-0">
       <CardHeader>
         {data.has_accepted_answer ? (
           <div className="flex justify-center">

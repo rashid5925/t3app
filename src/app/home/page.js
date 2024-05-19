@@ -7,6 +7,7 @@ import Sidebar from "@/components/Sidebar";
 import LocationMenu from "@/components/LocationMenu";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   QueryClient, 
   QueryClientProvider,
@@ -14,13 +15,11 @@ import {
 } from "@tanstack/react-query";
 import Spinner from "@/components/Spinner";
 import Image from "next/image";
-
+import { auth } from "@/app/firebase/config";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTextWidth } from "@fortawesome/free-solid-svg-icons";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
-import { auth } from "@/app/firebase/config";
-import { Button } from "@/components/ui/button";
-import { signOut } from "firebase/auth";
 
 let howToTag = false;
 
@@ -33,6 +32,11 @@ const Home = () => {
   const router = useSearchParams();
   const mode = router.get("mode");
   const contols = router.get("controls");
+  const rout = useRouter();
+  const [user] = useAuthState(auth);
+  if (!user) {
+    rout.push("/");
+  }
 
   const handleInfiniteScroll = async () => {
     try {
@@ -106,7 +110,6 @@ const Home = () => {
       :
       <>
       <div className="flex flex-col gap-7 fixed top-10 right-10">
-        <Button onClick={() =>signOut(auth)}>Signout</Button>
         <Image
           src={`/icons/${arrow === "top" ? "up" : "down"}.svg`}
           width={40}
