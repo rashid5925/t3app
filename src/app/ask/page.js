@@ -12,8 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
 import { faRecordVinyl } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { auth } from "@/app/firebase/config";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useUser } from "@/lib/auth";
+import Spinner from "@/components/Spinner";
 
 const modelSrc = "https://readyplayerme.github.io/visage/male.glb";
 
@@ -23,11 +23,9 @@ const Ask = () => {
   const [timer, setTimer] = useState(3);
   const [status, setStatus] = useState(0);
   const rout = useRouter();
-  const [user] = useAuthState(auth);
-  if (!user) {
-    rout.push("/");
-  }
+  const user = useUser();
   
+
   useEffect(() => {
     let interval = null;
     if (status == 1) {
@@ -46,6 +44,12 @@ const Ask = () => {
       clearInterval(interval);
     };
   }, [status]);
+  if (user === false) {
+    return <Spinner />;
+  }
+  if (!user) {
+    rout.push("/");
+  }
 
   if (mode == "vid") {
     return <AskVid />;
@@ -63,22 +67,22 @@ const Ask = () => {
               className="cursor-pointer"
             />
             {status == 2 ? (
-              <Link href={{pathname: "/preview", query: {mode: 'overlay'} }}>
-              <Image
-                src={"/icons/double_tick.svg"}
-                width={35}
-                height={35}
-                alt="double tick"
-                className="cursor-pointer"
-              />
+              <Link href={{ pathname: "/preview", query: { mode: "overlay" } }}>
+                <Image
+                  src={"/icons/double_tick.svg"}
+                  width={35}
+                  height={35}
+                  alt="double tick"
+                  className="cursor-pointer"
+                />
               </Link>
             ) : (
-              <Link href={{pathname: "/preview", query: {mode: 'image'} }}>
-              <FontAwesomeIcon
-                icon={faPhotoFilm}
-                style={{ width: "35px", height: "30px" }}
-                className="cursor-pointer"
-              />
+              <Link href={{ pathname: "/preview", query: { mode: "image" } }}>
+                <FontAwesomeIcon
+                  icon={faPhotoFilm}
+                  style={{ width: "35px", height: "30px" }}
+                  className="cursor-pointer"
+                />
               </Link>
             )}
             {status == 2 ? (
@@ -117,9 +121,7 @@ const Ask = () => {
         ) : (
           <></>
         )}
-        {mode == "focus" || mode == "breakroom" ?
-        <ChatAsk />
-        :<></>}
+        {mode == "focus" || mode == "breakroom" ? <ChatAsk /> : <></>}
         {mode == "focus" ? <LocationMenu /> : <></>}
       </div>
       <div>

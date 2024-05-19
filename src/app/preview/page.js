@@ -8,8 +8,8 @@ import ExcaliCanvas from "@/components/excalidraw/ExcaliCanvas";
 import { Rnd } from "react-rnd";
 import PerviewOverlay from "@/components/PreviewOverlay";
 import PreviewVideo from "@/components/PreviewVideo";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
+import { useUser } from "@/lib/auth";
+import Spinner from "@/components/Spinner";
 
 const Preview = () => {
   const router = useSearchParams();
@@ -17,10 +17,8 @@ const Preview = () => {
   const [timer, setTimer] = useState(3);
   const [status, setStatus] = useState(0);
   const rout = useRouter();
-  const [user] = useAuthState(auth);
-  if (!user) {
-    rout.push("/");
-  }
+  const user = useUser();
+
   useEffect(() => {
     let interval = null;
     if (status == 1) {
@@ -39,6 +37,12 @@ const Preview = () => {
       clearInterval(interval);
     };
   }, [status]);
+  if (user === false) {
+    return <Spinner />;
+  }
+  if (!user) {
+    rout.push("/");
+  }
   if (mode == "overlay") {
     return <PerviewOverlay />;
   } else if (mode == "video") {
@@ -134,6 +138,7 @@ const Preview = () => {
       </div>
       {status == 2 ? (
       <div className="flex w-full justify-center fixed w-screen h-screen bottom-0 z-30">
+        {typeof window !== 'undefined' ? 
         <Rnd
           style={{
             display: "flex",
@@ -144,7 +149,7 @@ const Preview = () => {
           }}
           default={{
             x: 0,
-            y: window.innerHeight - 200,
+            y: 700 - 200,
             width: 320,
             height: 200,
           }}
@@ -168,7 +173,7 @@ const Preview = () => {
                 />
               </div>
           </div>
-        </Rnd>
+        </Rnd> : <></>}
       </div>
       ) : (<></>)}
     </div>

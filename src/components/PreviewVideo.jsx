@@ -19,6 +19,7 @@ const PreviewVideo = () => {
   const [showStatusBar, setShowStatusBar] = useState(true);
   const [showActivityBar, setShowActivityBar] = useState(false);
   const [showPanel, setShowPanel] = useState(false);
+
   return (
     <div className="m-5 min-h-screen flex flex-col items-center">
       <div className="flex flex-col gap-7 fixed top-10 right-10 z-50">
@@ -79,44 +80,48 @@ const PreviewVideo = () => {
         </video>
       </div>
       <div className="flex w-full justify-center fixed w-screen h-screen bottom-0 z-10">
-        <Rnd
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: "solid 1px #ddd",
-            background: "#f0f0f0",
-          }}
-          default={{
-            x: 0,
-            y: window.innerHeight - 200,
-            width: 320,
-            height: 200,
-          }}
-        >
-          <div className="flex flex-col justify-around items-center w-full h-full">
-            <p>Draggable</p>
-            <div className="flex justify-around items-center py-3 w-full">
-              <FontAwesomeIcon
-                icon={faRotateLeft}
-                style={{ width: "35px", height: "30px" }}
-                className="cursor-pointer"
-              />
-              <Image
-                src={"/icons/pause.svg"}
-                width={36}
-                height={36}
-                alt="camera"
-                className="cursor-pointer"
-              />
-              <FontAwesomeIcon
-                icon={faRotateRight}
-                style={{ width: "35px", height: "30px" }}
-                className="cursor-pointer"
-              />
+        {typeof window !== "undefined" ? (
+          <Rnd
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: "solid 1px #ddd",
+              background: "#f0f0f0",
+            }}
+            default={{
+              x: 0,
+              y: window.innerHeight - 200,
+              width: 320,
+              height: 200,
+            }}
+          >
+            <div className="flex flex-col justify-around items-center w-full h-full">
+              <p>Draggable</p>
+              <div className="flex justify-around items-center py-3 w-full">
+                <FontAwesomeIcon
+                  icon={faRotateLeft}
+                  style={{ width: "35px", height: "30px" }}
+                  className="cursor-pointer"
+                />
+                <Image
+                  src={"/icons/pause.svg"}
+                  width={36}
+                  height={36}
+                  alt="camera"
+                  className="cursor-pointer"
+                />
+                <FontAwesomeIcon
+                  icon={faRotateRight}
+                  style={{ width: "35px", height: "30px" }}
+                  className="cursor-pointer"
+                />
+              </div>
             </div>
-          </div>
-        </Rnd>
+          </Rnd>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

@@ -14,8 +14,8 @@ import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { Rnd } from "react-rnd";
 import ChatPopover from "@/components/ChatPopover";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
+import { useUser } from "@/lib/auth";
+import Spinner from "@/components/Spinner";
 
 const Show = () => {
   const router = useSearchParams();
@@ -26,10 +26,8 @@ const Show = () => {
   const [timer, setTimer] = useState(3);
   const [status, setStatus] = useState(0);
   const rout = useRouter();
-  const [user] = useAuthState(auth);
-  if (!user) {
-    rout.push("/");
-  }
+  const user = useUser();
+  
 
   useEffect(() => {
     let interval = null;
@@ -49,6 +47,12 @@ const Show = () => {
       clearInterval(interval);
     };
   }, [status]);
+  if (user === false) {
+    return <Spinner />;
+  }
+  if (!user) {
+    rout.push("/");
+  }
   if (mode == "") {
     return <div>Pass valid as threadid=xxxxx</div>;
   }
@@ -183,6 +187,7 @@ const Show = () => {
             mode == "video" ? "" : "fixed"
           } w-screen h-screen bottom-0 z-30`}
         >
+          {typeof window !== 'undefined' ? 
           <Rnd
             style={{
               display: "flex",
@@ -193,7 +198,7 @@ const Show = () => {
             }}
             default={{
               x: 0,
-              y: window.innerHeight - 200,
+              y: size.height - 200,
               width: 320,
               height: 200,
             }}
@@ -238,7 +243,7 @@ const Show = () => {
                 </div>
               </div>
             </div>
-          </Rnd>
+          </Rnd> : <></>}
         </div>
       ) : (
         <></>

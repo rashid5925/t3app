@@ -97,6 +97,7 @@ const AskVid = () => {
         <ExcaliCanvas height="94vh" width="97vw" />
       </div>
       <div className="flex w-full justify-center fixed w-screen h-screen bottom-0 z-30">
+        {typeof window !== 'undefined' ?
         <Rnd
           style={{
             display: "flex",
@@ -108,7 +109,7 @@ const AskVid = () => {
           onDragStop={() => setDrag(true)}
           default={{
             x: 0,
-            y: window.innerHeight - 200,
+            y: size.height - 200,
             width: 320,
             height: 200,
           }}
@@ -136,7 +137,7 @@ const AskVid = () => {
               <></>
             )}
           </div>
-        </Rnd>
+        </Rnd> :<></>}
       </div>
     </div>
   );

@@ -15,11 +15,11 @@ import {
 } from "@tanstack/react-query";
 import Spinner from "@/components/Spinner";
 import Image from "next/image";
-import { auth } from "@/app/firebase/config";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTextWidth } from "@fortawesome/free-solid-svg-icons";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
+import { useUser } from "@/lib/auth";
+import { useWindowSize } from "@/lib/windowSize";
 
 let howToTag = false;
 
@@ -32,11 +32,10 @@ const Home = () => {
   const router = useSearchParams();
   const mode = router.get("mode");
   const contols = router.get("controls");
+  const size = useWindowSize();
   const rout = useRouter();
-  const [user] = useAuthState(auth);
-  if (!user) {
-    rout.push("/");
-  }
+  const user = useUser();
+
 
   const handleInfiniteScroll = async () => {
     try {
@@ -94,6 +93,13 @@ const Home = () => {
       );
     }
   }, [status]);
+
+  if (user === false) {
+    return <Spinner />;
+  }
+  if (!user) {
+    rout.push("/");
+  }
 
   const toggleArrow = async () => {
     await setArrow(arrow === "top" ? "latest" : "top");
