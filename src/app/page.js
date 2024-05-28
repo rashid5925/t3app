@@ -37,7 +37,7 @@ export default function Page() {
     setLoading(true);
     try {
       const res = await signInWithGoogle();
-      if (res.user) {
+      if (res && res.user) {
         setEmail("");
         setPassword("");
         router.push("/home?mode=embed&controls=true");
@@ -56,7 +56,7 @@ export default function Page() {
     try {
       if (email != "" && password != "") {
         const res = await signInWithEmailAndPassword(email, password);
-        if (res.user) {
+        if (res && res.user) {
           setEmail("");
           setPassword("");
           router.push("/home?mode=embed&controls=true");

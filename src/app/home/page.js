@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTextWidth } from "@fortawesome/free-solid-svg-icons";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "@/lib/auth";
+import { getCardData } from "@/app/actions";
 
 let howToTag = false;
 
@@ -53,24 +54,12 @@ const Home = () => {
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
   }, []);
 
-  const getCardData = async (page) => {
-    const url = `/c/documentation/devs/56/l/${arrow}.json?ascending=false&page=${page}&per_page=8`;
-    const response = await fetch(url, {
-      mode: "no-cors",
-    });
-    let data = await response.json();
-    const offset = data["topic_list"]["more_topics_url"]
-      ? parseInt(data["topic_list"]["more_topics_url"].split("=")[2])
-      : 1;
-    data = data["topic_list"]["topics"];
-    setIsLoading(false);
-    return { data, offset };
-  };
+  
   const { data, error, fetchNextPage, refetch, isFetching, status } =
     useInfiniteQuery({
       queryKey: ["topics"],
       queryFn: async ({ pageParam = 1 }) => {
-        const response = await getCardData(pageParam);
+        const response = await getCardData(arrow, pageParam);
         return response;
       },
       getNextPageParam: (_, pages) => {
@@ -103,6 +92,7 @@ const Home = () => {
     await setArrow(arrow === "top" ? "latest" : "top");
     setIsLoading(true);
     refetch({ refetchPage: (page, index) => index === 0 });
+    setIsLoading(false);
   };
 
 
