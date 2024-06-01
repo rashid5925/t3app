@@ -33,7 +33,7 @@ export default function CarouselUsers() {
         {users.length > 0 ? (
           users.map((user, i) => (
             <CarouselItem className="basis-1/2 md:basis-1/3" key={i}>
-              <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
+              <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-[#ffe259] to-[#ffa751] ms-2 rounded-md">
                 <div className="flex justify-around items-center py-2">
                   <p>{user.username}</p>
                   <p>{user.name}</p>
@@ -52,7 +52,7 @@ export default function CarouselUsers() {
           ))
         ) : (
           <CarouselItem className="basis-1/2 md:basis-1/3 ">
-            <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
+            <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-[#ffe259] to-[#ffa751] ms-2 rounded-md">
               <div className="flex justify-around items-center py-2">
                 <Spinner />
               </div>

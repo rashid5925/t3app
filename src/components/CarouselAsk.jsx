@@ -46,7 +46,7 @@ export default function CarouselAsk() {
     >
       <CarouselContent className="mb-1">
         <CarouselItem className="basis-1/2 md:basis-1/3" key={555551}>
-          <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
+          <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-[#ffe259] to-[#ffa751] ms-2 rounded-md">
             <div className="flex justify-around items-center py-2">
               <MusicPopover joined={false}>
                 <Image
@@ -85,7 +85,7 @@ export default function CarouselAsk() {
           </div>
         </CarouselItem>
         <CarouselItem className="basis-1/2 md:basis-1/3" key={555552}>
-          <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
+          <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-[#ffe259] to-[#ffa751] ms-2 rounded-md">
             <div className="flex justify-around items-center py-2">
               <TodoPopover>
                 <Image
@@ -101,7 +101,7 @@ export default function CarouselAsk() {
           </div>
         </CarouselItem>
         <CarouselItem className="basis-1/2 md:basis-1/3" key={555553}>
-          <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-cyan-500 to-blue-500 ms-2 rounded-md">
+          <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-[#ffe259] to-[#ffa751] ms-2 rounded-md">
             <div className="flex justify-around items-center py-2">
               <Image
                 src={`/icons/eye_${eyeClosed ? "close" : "open"}.svg`}

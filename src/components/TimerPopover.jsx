@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/popover";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 
 export default function TimerPopover({ time, status, children }) {
@@ -21,19 +22,23 @@ export default function TimerPopover({ time, status, children }) {
       <PopoverContent className="w-80">
         <div className="flex gap-2 justify-around items-center my-2">
           {!status.status ? (
-            <Image
-              src={"/icons/up.svg"}
-              width={25}
-              height={25}
-              alt="up"
-              className="cursor-pointer"
-              onClick={() =>
-                time.timer < 3000 ? time.setTimer(time.timer + 300) : ""
-              }
-            />
+            <>
+              <Image
+                src={"/icons/up.svg"}
+                width={25}
+                height={25}
+                alt="up"
+                className="cursor-pointer"
+                onClick={() =>
+                  time.timer < 3000 ? time.setTimer(time.timer + 300) : ""
+                }
+              />
+              <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
+            </>
           ) : (
             ""
           )}
+          
           <Label>
             <span className="countdown font-mono text-2xl">
               <span
@@ -52,6 +57,7 @@ export default function TimerPopover({ time, status, children }) {
               s
             </span>
           </Label>
+          <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
           {!status.status ? (
             <>
               <Image
@@ -64,6 +70,7 @@ export default function TimerPopover({ time, status, children }) {
                   time.timer > 300 ? time.setTimer(time.timer - 300) : ""
                 }
               />
+              <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
               <Image
                 src={"/icons/double_tick.svg"}
                 width={35}

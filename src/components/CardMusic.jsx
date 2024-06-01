@@ -3,7 +3,6 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import {
   Select,
@@ -29,10 +28,10 @@ export default function CardMusic({ data }) {
   return (
     <Card className="w-[180px]">
       <CardHeader>
-        <CardTitle>{data.sound}</CardTitle>
+        <p className="text-center">{data.sound}</p>
       </CardHeader>
       <Separator className="h-1 bg-black my-2" />
-      <CardContent>
+      <CardContent className="min-h-[102px]">
         <div className="grid w-full items-center justify-center gap-4">
           <div className="flex flex-col items-center space-y-1.5">
             {data.variantNames.length > 1 ? (
@@ -51,9 +50,9 @@ export default function CardMusic({ data }) {
                 </SelectContent>
               </Select>
             ) : (
-              <Label>{data.variantNames[0]}</Label>
+              <Label className="mt-4 mb-2">{data.variantNames[0]}</Label>
             )}
-            {data.icon ? <FontAwesomeIcon icon={data.icon} /> : <></>}
+            {data.icon ? <FontAwesomeIcon icon={data.icon} size="2xl" /> : <></>}
           </div>
         </div>
       </CardContent>
@@ -61,7 +60,7 @@ export default function CardMusic({ data }) {
       <CardFooter className="flex justify-around items-center">
         {play ? (
             volume === 0 ?
-            <FontAwesomeIcon onClick={() => setVolume(10)} className="cursor-pointer" icon="fa-solid fa-volume-xmark" />
+            <FontAwesomeIcon onClick={() => setVolume(10)} size="xl" className="cursor-pointer" icon="fa-solid fa-volume-xmark" />
             :
           <div className="flex gap-2 justify-center items-center">
             <Image
@@ -76,7 +75,7 @@ export default function CardMusic({ data }) {
           </div>
             
         ) : (
-          <FontAwesomeIcon onClick={() => setPlay(true)} className="cursor-pointer" icon="fa-solid fa-power-off" />
+          <FontAwesomeIcon onClick={() => setPlay(true)} size="xl" className="cursor-pointer" icon="fa-solid fa-power-off" />
         )}
       </CardFooter>
     </Card>

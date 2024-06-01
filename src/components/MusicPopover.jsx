@@ -4,6 +4,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import Image from "next/image";
+import { Separator } from "@/components/ui/separator";
 import MusicCarousel from "@/components/MusicCarousel";
 
 export default function MusicPopover({ joined, children }) {
@@ -21,18 +22,21 @@ export default function MusicPopover({ joined, children }) {
               width={25} 
               height={25} 
               alt="left" />
+              <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
             <Image
               src={"/icons/pause.svg"}
               width={25}
               height={25}
               alt="pause"
             />
+            <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
             <Image
               src={"/icons/right.svg"}
               width={25}
               height={25}
               alt="right"
             />
+            <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
             <Image
               src={"/icons/gear.svg"}
               width={35}
@@ -40,6 +44,7 @@ export default function MusicPopover({ joined, children }) {
               alt="settings"
             />
           </div>
+          <Separator className="h-1 bg-black my-2" />
           <div className="flex gap-2 justify-center items-center">
             <Image
               src={"/icons/volume.svg"}

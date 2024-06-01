@@ -29,6 +29,7 @@ const Home = () => {
   const [tags, setTags] = useState([]);
   const [reply, setReply] = useState(0); 
   const [joined, setJoined] = useState(false);
+  const [create, setCreate] = useState(false);
   const router = useSearchParams();
   const mode = router.get("mode");
   const contols = router.get("controls");
@@ -133,7 +134,7 @@ const Home = () => {
             {data.pages.map((page, i) => (
               <React.Fragment key={i}>
                 {page.data.map((d, j) => (
-                  <CardUI key={j+i} data={d} />
+                  <CardUI key={j+i} data={d} create={create} setJoined={setJoined} />
                 ))}
               </React.Fragment>
             ))}
@@ -152,8 +153,8 @@ const Home = () => {
       </>
       }
       {mode == 'embed' && contols == 'true' ? 
-      <div className="flex w-full justify-center opacity-50 fixed bottom-0">
-        <CarouselBottom howToTag={howToTag} tags={tags} reply={reply} joined={joined} setJoined={setJoined} />
+      <div className="flex w-full justify-center opacity-80 fixed bottom-0">
+        <CarouselBottom howToTag={howToTag} tags={tags} reply={reply} joined={joined} setJoined={setJoined} create={create} setCreate={setCreate} />
       </div>
       :<></>
       }

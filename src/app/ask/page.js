@@ -128,7 +128,7 @@ const Ask = () => {
         <Avatar modelSrc={modelSrc} style={{ width: "80vw", height: "75vh" }} />
       </div>
       {mode != "mini" ? (
-        <div className="flex w-full justify-center opacity-50 fixed bottom-0">
+        <div className="flex w-full justify-center opacity-90 fixed bottom-0">
           {mode == "focus" ? <CarouselAsk /> : <CarouselUsers />}
         </div>
       ) : (
