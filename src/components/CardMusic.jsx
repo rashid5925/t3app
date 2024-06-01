@@ -27,17 +27,17 @@ export default function CardMusic({ data }) {
   const [volume, setVolume] = useState(50);
   return (
     <Card className="w-[180px]">
-      <CardHeader>
+      <div className="m-4">
         <p className="text-center">{data.sound}</p>
-      </CardHeader>
+      </div>
       <Separator className="h-1 bg-black my-2" />
-      <CardContent className="min-h-[102px]">
+      <CardContent className="min-h-[118px]">
         <div className="grid w-full items-center justify-center gap-4">
           <div className="flex flex-col items-center space-y-1.5">
             {data.variantNames.length > 1 ? (
               <Select>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder={data.variantNames[0]} />
+                <SelectTrigger className="w-[180px] text-[10px] mx-auto">
+                  <SelectValue className="mx-auto" placeholder={data.variantNames[0]} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -52,12 +52,12 @@ export default function CardMusic({ data }) {
             ) : (
               <Label className="mt-4 mb-2">{data.variantNames[0]}</Label>
             )}
-            {data.icon ? <FontAwesomeIcon icon={data.icon} size="2xl" /> : <></>}
+            {data.icon ? <FontAwesomeIcon icon={data.icon} size="3x" /> : <></>}
           </div>
         </div>
       </CardContent>
       <Separator className="h-1 bg-black my-2" />
-      <CardFooter className="flex justify-around items-center">
+      <div className="flex justify-around items-center m-4">
         {play ? (
             volume === 0 ?
             <FontAwesomeIcon onClick={() => setVolume(10)} size="xl" className="cursor-pointer" icon="fa-solid fa-volume-xmark" />
@@ -77,7 +77,7 @@ export default function CardMusic({ data }) {
         ) : (
           <FontAwesomeIcon onClick={() => setPlay(true)} size="xl" className="cursor-pointer" icon="fa-solid fa-power-off" />
         )}
-      </CardFooter>
+      </div>
     </Card>
   );
 }
