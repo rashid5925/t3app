@@ -26,17 +26,17 @@ export default function CardMusic({ data }) {
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(50);
   return (
-    <Card className="w-[180px]">
-      <div className="m-4">
-        <p className="text-center">{data.sound}</p>
+    <Card className="w-[90px]">
+      <div className="m-2">
+        <p className="text-center text-[6px]">{data.sound}</p>
       </div>
-      <Separator className="h-1 bg-black my-2" />
-      <CardContent className="min-h-[118px]">
-        <div className="grid w-full items-center justify-center gap-4">
-          <div className="flex flex-col items-center space-y-1.5">
+      <Separator className="h-px bg-black my-2" />
+      <CardContent className="min-h-[60px] p-1">
+        <div className="grid w-full items-center justify-center gap-1">
+          <div className="flex flex-col items-center">
             {data.variantNames.length > 1 ? (
               <Select>
-                <SelectTrigger className="w-[180px] text-[10px] mx-auto">
+                <SelectTrigger className="w-[60px] h-[25px] text-[6px] mx-auto">
                   <SelectValue className="mx-auto" placeholder={data.variantNames[0]} />
                 </SelectTrigger>
                 <SelectContent>
@@ -50,23 +50,23 @@ export default function CardMusic({ data }) {
                 </SelectContent>
               </Select>
             ) : (
-              <Label className="mt-4 mb-2">{data.variantNames[0]}</Label>
+              <Label className="mt-4 mb-2 text-[6px]">{data.variantNames[0]}</Label>
             )}
-            {data.icon ? <FontAwesomeIcon icon={data.icon} size="3x" /> : <></>}
+            {data.icon ? <FontAwesomeIcon icon={data.icon} size="sm" /> : <></>}
           </div>
         </div>
       </CardContent>
-      <Separator className="h-1 bg-black my-2" />
-      <div className="flex justify-around items-center m-4">
+      <Separator className="h-px bg-black my-1" />
+      <div className="flex justify-around items-center mx-4">
         {play ? (
             volume === 0 ?
-            <FontAwesomeIcon onClick={() => setVolume(10)} size="xl" className="cursor-pointer" icon="fa-solid fa-volume-xmark" />
+            <FontAwesomeIcon onClick={() => setVolume(10)} size="sm" className="cursor-pointer" icon="fa-solid fa-volume-xmark" />
             :
           <div className="flex gap-2 justify-center items-center">
             <Image
               src={"/icons/volume.svg"}
-              width={25}
-              height={25}
+              width={15}
+              height={15}
               alt="settings"
               onClick={() => setVolume(0)}
               className="cursor-pointer"
@@ -75,7 +75,7 @@ export default function CardMusic({ data }) {
           </div>
             
         ) : (
-          <FontAwesomeIcon onClick={() => setPlay(true)} size="xl" className="cursor-pointer" icon="fa-solid fa-power-off" />
+          <FontAwesomeIcon onClick={() => setPlay(true)} size="sm" className="cursor-pointer" icon="fa-solid fa-power-off" />
         )}
       </div>
     </Card>

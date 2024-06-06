@@ -19,7 +19,7 @@ export default function TimerPopover({ time, status, children }) {
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
-      <PopoverContent className="w-80">
+      <PopoverContent className="w-80 py-2 rounded-[40px] mb-8">
         <div className="flex gap-2 justify-around items-center my-2">
           {!status.status ? (
             <>
@@ -33,13 +33,13 @@ export default function TimerPopover({ time, status, children }) {
                   time.timer < 3000 ? time.setTimer(time.timer + 300) : ""
                 }
               />
-              <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
+              <Separator className="h-28 border-dashed border-black border-2 bg-transparent mx-2" orientation="vertical" />
             </>
           ) : (
             ""
           )}
           
-          <Label>
+          <Label className="m-auto">
             <span className="countdown font-mono text-2xl">
               <span
                 style={{
@@ -57,7 +57,7 @@ export default function TimerPopover({ time, status, children }) {
               s
             </span>
           </Label>
-          <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
+          <Separator className="h-28 border-dashed border-black border-2 bg-transparent mx-2" orientation="vertical" />
           {!status.status ? (
             <>
               <Image
@@ -70,7 +70,7 @@ export default function TimerPopover({ time, status, children }) {
                   time.timer > 300 ? time.setTimer(time.timer - 300) : ""
                 }
               />
-              <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
+              <Separator className="h-28 border-dashed border-black border-2 bg-transparent mx-2" orientation="vertical" />
               <Image
                 src={"/icons/double_tick.svg"}
                 width={35}
@@ -93,7 +93,7 @@ export default function TimerPopover({ time, status, children }) {
                 width={25}
                 height={25}
                 alt="reset"
-                className="cursor-pointer"
+                className="cursor-pointer m-auto"
                 onClick={resetTimer}
               />
               <Image
@@ -101,7 +101,7 @@ export default function TimerPopover({ time, status, children }) {
                 width={25}
                 height={25}
                 alt="reset"
-                className="cursor-pointer"
+                className="cursor-pointer m-auto"
                 onClick={() => setConfirm(false)}
               />
             </>
@@ -111,7 +111,7 @@ export default function TimerPopover({ time, status, children }) {
               width={25}
               height={25}
               alt="reset"
-              className="cursor-pointer"
+              className="cursor-pointer m-auto"
               onClick={() => setConfirm(true)}
             />
           )}

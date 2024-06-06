@@ -20,7 +20,7 @@ export default function LivePopover({ setJoined, create, setCreate, children }) 
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
-      <PopoverContent className="w-80">
+      <PopoverContent className="w-80 rounded-[40px]">
         <div className="grid gap-4">
           <Card className="w-[280px]">
             <CardHeader>
@@ -35,10 +35,10 @@ export default function LivePopover({ setJoined, create, setCreate, children }) 
                 <MultiSelect />
               </div>
             </CardContent>
-            <Separator className="h-1 bg-black my-2" />
+            <Separator className="h-1 bg-black my-2 mb-0" />
             <CardFooter className="flex justify-around items-center">
               {!create ? (
-                <Button onClick={() => setCreate(true)}>Create</Button>
+                <Button onClick={() => setCreate(true)} className="mt-2">Create</Button>
               ) : (
                 <>
                   <Button onClick={() => setJoined(true)}>Join</Button>

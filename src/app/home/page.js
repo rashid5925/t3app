@@ -5,6 +5,7 @@ import CarouselBottom from "@/components/Carousel";
 import TextPopover from "@/components/TextPopover";
 import Sidebar from "@/components/Sidebar";
 import LocationMenu from "@/components/LocationMenu";
+import { Separator } from "@/components/ui/separator";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -104,7 +105,7 @@ const Home = () => {
       <HomeInCall data={data} /> 
       :
       <>
-      <div className="flex flex-col gap-7 fixed top-10 right-10">
+      <div className="flex flex-col gap-4 fixed top-10 right-10 bg-white rounded-lg p-2">
         <Image
           src={`/icons/${arrow === "top" ? "up" : "down"}.svg`}
           width={40}
@@ -114,9 +115,11 @@ const Home = () => {
           className="cursor-pointer"
           onClick={toggleArrow}
         />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         {mode == 'embed' && contols == 'true' ? 
         <>
         <LocationMenu />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <Sidebar />
         </>
         :
@@ -124,11 +127,12 @@ const Home = () => {
         <TextPopover>
         <FontAwesomeIcon icon={faTextWidth} style={{width: "40px", height: "35px"}} className="cursor-pointer" />
         </TextPopover>
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <FontAwesomeIcon icon={faPhotoFilm} style={{width: "40px", height: "35px"}} className="cursor-pointer" />
         </>
         }
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-3 lg:grid-cols-4 gap-5">
         {status === "success" && !isLoading ? (
           <>
             {data.pages.map((page, i) => (
@@ -153,7 +157,7 @@ const Home = () => {
       </>
       }
       {mode == 'embed' && contols == 'true' ? 
-      <div className="flex w-full justify-center opacity-80 fixed bottom-0">
+      <div className="flex w-full justify-center opacity-100 fixed bottom-0">
         <CarouselBottom howToTag={howToTag} tags={tags} reply={reply} joined={joined} setJoined={setJoined} create={create} setCreate={setCreate} />
       </div>
       :<></>

@@ -18,6 +18,7 @@ export default function ChatAsk({ postId = "15772" }) {
   const [data, setData] = useState([]);
   useEffect(() => {
     const getUsers = async () => {
+      postId = "264024";
       const response = await fetch(
         `/t/${postId}.json?filter_top_level_replies=true`
       );
@@ -83,12 +84,12 @@ export default function ChatAsk({ postId = "15772" }) {
             <Spinner />
           )}
         </div>
-        <SheetFooter>
-          <div className="flex justify-around">
+        <SheetFooter className="justify-around">
+          <div className="flex justify-around  w-full">
             <ChatPopover>
-              <Button>Reply</Button>
+              <Button variant="outline">Reply</Button>
             </ChatPopover>
-            <Button>
+            <Button variant="outline">
               <div className="flex gap-2">
                 <Image
                   src={"/icons/volume.svg"}

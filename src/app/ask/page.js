@@ -14,6 +14,7 @@ import { faRecordVinyl } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useUser } from "@/lib/auth";
 import Spinner from "@/components/Spinner";
+import { Separator } from "@/components/ui/separator";
 
 const modelSrc = "https://readyplayerme.github.io/visage/male.glb";
 
@@ -24,7 +25,7 @@ const Ask = () => {
   const [status, setStatus] = useState(0);
   const rout = useRouter();
   const user = useUser();
-  
+  const [yes, setYes] = useState(false);
 
   useEffect(() => {
     let interval = null;
@@ -56,16 +57,18 @@ const Ask = () => {
   }
   return (
     <div className="m-5 min-h-screen flex flex-col items-center">
-      <div className="flex flex-col gap-7 fixed top-10 right-10">
+      <div className="flex flex-col gap-7 fixed top-10 right-10 bg-white rounded-lg p-2">
         {mode == "mini" ? (
           <>
             <Image
-              src={"/icons/no.svg"}
+              src={`/icons/${yes? "yes": "no"}.svg`}
               width={30}
               height={30}
               alt="no"
+              onClick={() => setYes(!yes)}
               className="cursor-pointer"
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             {status == 2 ? (
               <Link href={{ pathname: "/preview", query: { mode: "overlay" } }}>
                 <Image
@@ -86,6 +89,8 @@ const Ask = () => {
               </Link>
             )}
             {status == 2 ? (
+              <>
+              <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
               <Image
                 src={"/icons/screen.svg"}
                 width={35}
@@ -93,7 +98,26 @@ const Ask = () => {
                 alt="screen"
                 className="cursor-pointer"
               />
+              <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
+              <Image
+                src={"/icons/camera.svg"}
+                width={35}
+                height={35}
+                alt="camera"
+                className="cursor-pointer"
+              />
+              <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
+              <Image
+                src={"/icons/mic.svg"}
+                width={35}
+                height={35}
+                alt="mic"
+                className="cursor-pointer"
+              />
+              </>
             ) : status == 1 ? (
+              <>
+              <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
               <span className="countdown font-mono text-2xl">
                 <span
                   style={{
@@ -101,13 +125,17 @@ const Ask = () => {
                   }}
                 ></span>
               </span>
+              </>
             ) : (
+              <>
+              <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
               <FontAwesomeIcon
                 icon={faRecordVinyl}
                 style={{ width: "35px", height: "30px" }}
                 className="cursor-pointer"
                 onClick={() => setStatus(1)}
               />
+              </>
             )}
           </>
         ) : mode == "focus" ? (
@@ -121,8 +149,18 @@ const Ask = () => {
         ) : (
           <></>
         )}
-        {mode == "focus" || mode == "breakroom" ? <ChatAsk /> : <></>}
-        {mode == "focus" ? <LocationMenu /> : <></>}
+        {mode == "focus" || mode == "breakroom" ? 
+        <>
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
+        <ChatAsk />
+        </>
+         : <></>}
+        
+        {mode == "focus" ? <>
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
+        <LocationMenu />
+        </>
+         : <></>}
       </div>
       <div>
         <Avatar modelSrc={modelSrc} style={{ width: "80vw", height: "75vh" }} />

@@ -17,10 +17,6 @@ const MultiSelect = () => {
     let [activeLanguages, setActiveLanguages] = useState([])
   return (
     <Listbox value={activeLanguages} onChange={setActiveLanguages} name="people" multiple>
-            <Listbox.Label className="block text-sm font-medium leading-5 text-gray-700">
-              Assigned to
-            </Listbox.Label>
-
             <div className="relative">
               <span className="inline-block w-full rounded-md shadow-sm">
                 <Listbox.Button className="focus:shadow-outline-blue relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-2 pr-10 text-left transition duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5">

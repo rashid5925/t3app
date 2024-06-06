@@ -5,12 +5,17 @@ import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
 import { faRecordVinyl } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import ExcaliCanvas from "@/components/excalidraw/ExcaliCanvas";
+import { Separator } from "@/components/ui/separator";
 import { Rnd } from "react-rnd";
+import Link from "next/link";
 
 const AskVid = () => {
   const [timer, setTimer] = useState(3);
   const [status, setStatus] = useState(0);
   const [drag, setDrag] = useState(false);
+  const [play, setPlay] = useState(false);
+  const [yes, setYes] = useState(false);
+  
   useEffect(() => {
     let interval = null;
     if (status == 1) {
@@ -31,14 +36,16 @@ const AskVid = () => {
   }, [status]);
   return (
     <div className="m-5 min-h-screen flex flex-col items-center">
-      <div className="flex flex-col gap-7 fixed top-10 right-10 z-50">
+      <div className="flex flex-col gap-7 fixed top-10 right-10 z-50 bg-white rounded-lg p-2">
         <Image
-          src={"/icons/pause.svg"}
+          src={`/icons/${play? "play": "pause"}.svg`}
           width={30}
           height={30}
           alt="pause"
+          onClick={() => setPlay(!play)}
           className="cursor-pointer"
         />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <Image
           src={"/icons/seek_back.svg"}
           width={30}
@@ -46,14 +53,18 @@ const AskVid = () => {
           alt="seek_back"
           className="cursor-pointer"
         />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <Image
-          src={"/icons/no.svg"}
+          src={`/icons/${yes? "yes": "no"}.svg`}
           width={30}
           height={30}
           alt="no"
+          onClick={() => setYes(!yes)}
           className="cursor-pointer"
         />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         {status == 2 ? (
+          <Link href={{ pathname: "/preview", query: { mode: "overlay" } }}>
           <Image
             src={"/icons/double_tick.svg"}
             width={35}
@@ -61,13 +72,17 @@ const AskVid = () => {
             alt="double tick"
             className="cursor-pointer"
           />
+        </Link>
         ) : (
-          <FontAwesomeIcon
-            icon={faPhotoFilm}
-            style={{ width: "35px", height: "30px" }}
-            className="cursor-pointer"
-          />
+          <Link href={{ pathname: "/preview", query: { mode: "image" } }}>
+                <FontAwesomeIcon
+                  icon={faPhotoFilm}
+                  style={{ width: "35px", height: "30px" }}
+                  className="cursor-pointer"
+                />
+              </Link>
         )}
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         {status == 2 ? (
           <Image
             src={"/icons/screen.svg"}
@@ -106,6 +121,7 @@ const AskVid = () => {
             border: "solid 1px #ddd",
             background: "#f0f0f0",
             pointerEvents: "all",
+            borderRadius: "30px"
           }}
           onDragStop={() => setDrag(true)}
           default={{
@@ -117,7 +133,7 @@ const AskVid = () => {
         >
           <div className="flex flex-col justify-around items-center w-full h-full">
             <p>Draggable</p>
-            {drag ? (
+            {drag || status == 2 ? (
               <div className="flex justify-around items-center py-3 w-full">
                 <Image
                   src={"/icons/camera.svg"}

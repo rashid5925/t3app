@@ -19,6 +19,7 @@ import {
 import { Avatar } from "@readyplayerme/visage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { Separator } from "@/components/ui/separator";
 import { AvatarCreator } from "@readyplayerme/react-avatar-creator";
 import { useState } from "react";
 import { useMediaDevices } from "@livekit/components-react";
@@ -47,10 +48,10 @@ export default function SettingSidebar() {
         />
       </SheetTrigger>
       <SheetContent className="overflow-y-scroll">
-        <SheetHeader>
+        <SheetHeader className="items-end">
           <FontAwesomeIcon
             icon={faPencil}
-            className="cursor-pointer"
+            className="cursor-pointer mr-3"
             onClick={() => setEdit(true)}
           />
         </SheetHeader>
@@ -65,7 +66,9 @@ export default function SettingSidebar() {
             <Avatar modelSrc={modelSrc} />
           )}
         </div>
-        <div className="grid gap-2 py-2">
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
+        <div className="flex justify-around py-2">
+          <div className="grid gap-2 py-2">
           <Label>Video Input</Label>
           <Select>
             <SelectTrigger>
@@ -96,8 +99,43 @@ export default function SettingSidebar() {
               </SelectGroup>
             </SelectContent>
           </Select>
+          </div>
+          <Separator className="h-40 border-dashed border-black border-2 bg-transparent mx-2" orientation="vertical" />
+          <div className="grid gap-2 py-2">
+          <Label>Video Output</Label>
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Video Outputs" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {videoDevices.map((item) => (
+                  <SelectItem key={item.deviceId} value={item}>
+                    {item.label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Label>Audio Output</Label>
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Audio Outputs" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {audioDevices.map((item) => (
+                  <SelectItem key={item.deviceId} value={item}>
+                    {item.label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          </div>
         </div>
-        <SheetFooter>
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
+        <SheetFooter className="justify-center" style={{justifyContent: 'center'}}>
           <SheetClose asChild>
             <Button type="submit" className="mt-4" variant="outline">
                 <Image

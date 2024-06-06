@@ -10,12 +10,14 @@ import PerviewOverlay from "@/components/PreviewOverlay";
 import PreviewVideo from "@/components/PreviewVideo";
 import { useUser } from "@/lib/auth";
 import Spinner from "@/components/Spinner";
+import { Separator } from "@/components/ui/separator";
 
 const Preview = () => {
   const router = useSearchParams();
   const mode = router.get("mode");
   const [timer, setTimer] = useState(3);
   const [status, setStatus] = useState(0);
+  const [yes, setYes] = useState(false);
   const rout = useRouter();
   const user = useUser();
 
@@ -50,7 +52,7 @@ const Preview = () => {
   }
   return (
     <div className="m-5 min-h-screen flex flex-col items-center">
-      <div className="flex flex-col gap-7 fixed top-10 right-10 z-50">
+      <div className="flex flex-col gap-7 fixed top-10 right-10 z-50 bg-white rounded-lg p-2">
         {status == 0 ? (
           <>
             <Image
@@ -60,13 +62,16 @@ const Preview = () => {
               alt="double tick"
               className="cursor-pointer"
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <Image
-              src={"/icons/no.svg"}
+              src={`/icons/${yes? "yes": "no"}.svg`}
               width={30}
               height={30}
               alt="no"
+              onClick={() => setYes(!yes)}
               className="cursor-pointer"
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <FontAwesomeIcon
               icon={faRecordVinyl}
               style={{ width: "35px", height: "30px" }}
@@ -77,12 +82,14 @@ const Preview = () => {
         ) : status == 1 ? (
           <>
             <Image
-              src={"/icons/no.svg"}
-              width={30}
-              height={30}
-              alt="no"
+             src={`/icons/${yes? "yes": "no"}.svg`}
+             width={30}
+             height={30}
+             alt="no"
+             onClick={() => setYes(!yes)}
               className="cursor-pointer"
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <Image
               src={"/icons/double_tick.svg"}
               width={35}
@@ -90,6 +97,7 @@ const Preview = () => {
               alt="double tick"
               className="cursor-pointer"
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <span className="countdown font-mono text-2xl">
               <span
                 style={{
@@ -101,12 +109,14 @@ const Preview = () => {
         ) : (
           <>
             <Image
-              src={"/icons/no.svg"}
+              src={`/icons/${yes? "yes": "no"}.svg`}
               width={30}
               height={30}
               alt="no"
+              onClick={() => setYes(!yes)}
               className="cursor-pointer"
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <Image
               src={"/icons/double_tick.svg"}
               width={35}
@@ -114,6 +124,7 @@ const Preview = () => {
               alt="double tick"
               className="cursor-pointer"
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <Image
               src={"/icons/screen.svg"}
               width={35}
@@ -146,12 +157,13 @@ const Preview = () => {
             justifyContent: "center",
             border: "solid 1px #ddd",
             background: "#f0f0f0",
+            borderRadius: "30px"
           }}
           default={{
             x: 0,
-            y: 700 - 200,
-            width: 320,
-            height: 200,
+            y: window.innerHeight - 250,
+            width: 260,
+            height: 250,
           }}
         >
           <div className="flex flex-col justify-around items-center w-full h-full">
@@ -164,6 +176,10 @@ const Preview = () => {
                   alt="camera"
                   className="cursor-pointer"
                 />
+                <Separator
+                className="h-20 border-dashed border-black border-2 bg-transparent mx-2"
+                orientation="vertical"
+              />
                 <Image
                   src={"/icons/mic.svg"}
                   width={36}

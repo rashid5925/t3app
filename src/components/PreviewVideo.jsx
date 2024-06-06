@@ -14,22 +14,26 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
 
 const PreviewVideo = () => {
   const [showStatusBar, setShowStatusBar] = useState(true);
   const [showActivityBar, setShowActivityBar] = useState(false);
   const [showPanel, setShowPanel] = useState(false);
-
+  const [play, setPlay] = useState(false);
+  const [yes, setYes] = useState(false);
   return (
     <div className="m-5 min-h-screen flex flex-col items-center">
-      <div className="flex flex-col gap-7 fixed top-10 right-10 z-50">
+      <div className="flex flex-col gap-7 fixed top-10 right-10 z-50 bg-white rounded-lg p-2">
         <Image
-          src={"/icons/no.svg"}
+          src={`/icons/${yes? "yes": "no"}.svg`}
           width={30}
           height={30}
           alt="no"
+          onClick={() => setYes(!yes)}
           className="cursor-pointer"
         />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <Image
           src={"/icons/double_tick.svg"}
           width={30}
@@ -37,6 +41,7 @@ const PreviewVideo = () => {
           alt="double_tick"
           className="cursor-pointer"
         />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <Image
           src={"/icons/volume.svg"}
           width={30}
@@ -48,7 +53,8 @@ const PreviewVideo = () => {
       <div className="flex justify-center w-full z-30">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline">Sending to</Button>
+            <Button variant="outline">Sending to{" "}<pre>  </pre>
+              <Image src={`/icons/down.svg`} width={20} height={20} alt="up" /></Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuLabel>Sending to</DropdownMenuLabel>
@@ -89,6 +95,7 @@ const PreviewVideo = () => {
               border: "solid 1px #ddd",
               background: "#f0f0f0",
               pointerEvents: "all",
+              borderRadius: "30px"
             }}
             default={{
               x: 0,
@@ -106,10 +113,11 @@ const PreviewVideo = () => {
                   className="cursor-pointer"
                 />
                 <Image
-                  src={"/icons/pause.svg"}
+                  src={`/icons/${play? "play": "pause"}.svg`}
                   width={36}
                   height={36}
                   alt="camera"
+                  onClick={() => setPlay(!play)}
                   className="cursor-pointer"
                 />
                 <FontAwesomeIcon

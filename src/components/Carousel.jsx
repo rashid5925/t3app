@@ -17,7 +17,15 @@ import LivePopover from "@/components/LivePopover";
 import CallPopover from "@/components/CallPopover";
 import SettingSidebar from "@/components/SettingSidebar";
 
-export default function CarouselBottom({ howToTag, joined, setJoined, tags, reply, create, setCreate }) {
+export default function CarouselBottom({
+  howToTag,
+  joined,
+  setJoined,
+  tags,
+  reply,
+  create,
+  setCreate,
+}) {
   const [timer, setTimer] = useState(1500);
   const [status, setStatus] = useState(false);
   const [camera, setCamera] = useState(false);
@@ -49,9 +57,13 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
       className="w-[90%]"
     >
       <CarouselContent className="mb-1">
-        <CarouselItem className="basis-1/2 md:basis-1/3 " key={555555}>
-          <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-[#ffe259] to-[#ffa751] ms-2 rounded-md">
-            {joined ? <h3>Name</h3> : ""}
+        <CarouselItem className="basis-1/3 " key={555555}>
+          <div
+            className={`p-1 flex flex-col md:gap-${
+              joined ? "6" : "8"
+            } pt-8 bg-gradient-to-r from-[#ffe259] to-[#ffa751] ms-2 rounded-[40px]`}
+          >
+            {joined ? <h3 className="text-center">Name</h3> : ""}
             <div className="flex justify-around items-center py-2">
               <MusicPopover joined={joined}>
                 <Image
@@ -62,7 +74,10 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
                   className="cursor-pointer"
                 />
               </MusicPopover>
-              <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
+              <Separator
+                className="h-20 border-dashed border-black border-2 bg-transparent mx-2"
+                orientation="vertical"
+              />
               <TimerPopover
                 time={{ timer, setTimer }}
                 status={{ status, setStatus }}
@@ -76,7 +91,7 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
                     className="cursor-pointer"
                   />
                 ) : (
-                  <span className="countdown font-mono text-2xl">
+                  <span className="countdown font-mono text-4xl">
                     <span
                       style={{
                         "--value": ("0" + Math.floor((timer / 60) % 60)).slice(
@@ -88,9 +103,9 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
                 )}
               </TimerPopover>
             </div>
-            <Separator className="h-1 bg-black" />
-            <div className="flex justify-center items-center py-3">
-              <Link href={{pathname: "/ask", query: {mode: 'focus'} }}>
+            <Separator className="h-0 border-dashed border-black border-2 bg-transparent" />
+            <div className="flex justify-center items-center py-4">
+              <Link href={{ pathname: "/ask", query: { mode: "focus" } }}>
                 <Image
                   src={"/icons/speaker.svg"}
                   width={40}
@@ -101,8 +116,13 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
             </div>
           </div>
         </CarouselItem>
-        <CarouselItem className="basis-1/2 md:basis-1/3" key={5555551}>
-          <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-[#ffe259] to-[#ffa751] ms-2 rounded-md">
+        <CarouselItem className="basis-1/3" key={5555551}>
+          <div
+            className={`p-1 flex flex-col md:gap-${
+              joined ? "6" : "8"
+            } pt-8 bg-gradient-to-r from-[#00467F] to-[#A5CC82] ms-2 rounded-[40px]`}
+          >
+            {joined ? <h3 className="h-6"></h3> : ""}
             <div className="flex justify-around items-center py-2">
               <TodoPopover>
                 <Image
@@ -113,11 +133,14 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
                   className="cursor-pointer"
                 />
               </TodoPopover>
-              <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
+              <Separator
+                className="h-20 border-dashed border-black border-2 bg-transparent mx-2"
+                orientation="vertical"
+              />
               <NotesSidebar />
             </div>
-            <Separator className="h-1 bg-black" />
-            <div className="flex justify-around items-center py-4">
+            <Separator className="h-0 border-dashed border-black border-2 bg-transparent" />
+            <div className="flex justify-around items-center py-4 pb-[1.25rem]">
               <div>
                 {camera ? <Separator className="h-1 bg-black" /> : ""}
                 <Image
@@ -130,22 +153,33 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
                 />
               </div>
               {camera ? (
-                <Image
-                  src={"/icons/camera.svg"}
-                  width={36}
-                  height={36}
-                  alt="camera"
-                  className="cursor-pointer"
-                  onClick={() => setCamera(!camera)}
-                />
+                <>
+                  <Separator
+                    className="h-8 border-dashed border-black border-2 bg-transparent mx-2"
+                    orientation="vertical"
+                  />
+                  <Image
+                    src={"/icons/camera.svg"}
+                    width={36}
+                    height={36}
+                    alt="camera"
+                    className="cursor-pointer"
+                    onClick={() => setCamera(!camera)}
+                  />
+                </>
               ) : (
                 ""
               )}
             </div>
           </div>
         </CarouselItem>
-        <CarouselItem className="basis-1/2 md:basis-1/3" key={555553}>
-          <div className="p-1 flex flex-col pt-8 bg-gradient-to-r from-[#ffe259] to-[#ffa751] ms-2 rounded-md">
+        <CarouselItem className="basis-1/3" key={555553}>
+          <div
+            className={`p-1 flex flex-col md:gap-${
+              joined ? "6" : "8"
+            } pt-8 bg-gradient-to-r from-[#799F0C] to-[#ACBB78] ms-2 rounded-[40px]`}
+          >
+            {joined ? <h3 className="h-7"></h3> : ""}
             <div className="flex justify-around items-center py-2">
               <Image
                 src={`/icons/eye_${eyeClosed ? "close" : "open"}.svg`}
@@ -155,14 +189,17 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
                 className="cursor-pointer"
                 onClick={() => setEyeClosed(!eyeClosed)}
               />
-              <Separator className="w-1 h-20 bg-black mx-2" orientation="vertical" />
+              <Separator
+                className="h-20 border-dashed border-black border-2 bg-transparent mx-2"
+                orientation="vertical"
+              />
               <SettingSidebar />
             </div>
-            <Separator className="h-1 bg-black" />
-            <div className="flex justify-center items-center py-3">
+            <Separator className="h-0 border-dashed border-black border-2 bg-transparent" />
+            <div className="flex justify-center items-center py-3 pb-[0.6rem]">
               {joined ? (
-                <CallPopover>
                 <div className="flex gap-1">
+                  <div className="border-2 border-red-900 border-dashed rounded-full bg-red-300 p-2">
                   <Image
                     src={"/icons/disconnect.svg"}
                     width={50}
@@ -170,22 +207,24 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
                     alt="phone"
                     className="cursor-pointer"
                   />
-                  <Image
-                    src={"/icons/up.svg"}
-                    width={35}
-                    height={35}
-                    alt="up"
-                    className="cursor-pointer"
-                  />
+                  </div>
+                  <CallPopover>
+                    <Image
+                      src={"/icons/up.svg"}
+                      width={35}
+                      height={35}
+                      alt="up"
+                      className="cursor-pointer"
+                    />
+                  </CallPopover>
                 </div>
-                </CallPopover>
               ) : (
                 <LivePopover
                   howToTag={howToTag}
                   tags={tags}
                   reply={reply}
                   setJoined={setJoined}
-                  create={create} 
+                  create={create}
                   setCreate={setCreate}
                 >
                   <Image
@@ -202,16 +241,16 @@ export default function CarouselBottom({ howToTag, joined, setJoined, tags, repl
         </CarouselItem>
         {camera
           ? Array.from(Array(7).keys()).map((i) => (
-              <CarouselItem key={i} className="basis-1/2 md:basis-1/3 ">
+              <CarouselItem key={i} className="basis-1/3 ">
                 <div
                   style={{ backgroundImage: `url(/images/slide-${i + 1}.jpg)` }}
-                  className="p-1 pt-8 bg-no-repeat bg-center bg-cover h-[13.2rem] rounded-md"
+                  className="p-1 pt-8 bg-no-repeat bg-center bg-cover h-[17.2rem] max-md:h-[13.2rem] rounded-[40px]"
                 ></div>
               </CarouselItem>
             ))
           : ""}
       </CarouselContent>
-      {camera ? (
+      {camera || joined ? (
         <>
           <CarouselPrevious />
           <CarouselNext />

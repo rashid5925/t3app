@@ -12,7 +12,7 @@ export default function TodoPopover({ children }) {
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
-      <PopoverContent className="w-80">
+      <PopoverContent className="w-80 rounded-[40px]">
         <div className="grid gap-4">
           <div className="grid gap-2">
             <div className="grid grid-cols-8 items-center gap-2">

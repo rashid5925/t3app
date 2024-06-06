@@ -1,21 +1,26 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Sidebar from "@/components/Sidebar";
 import ExcaliCanvas from "@/components/excalidraw/ExcaliCanvas";
 import KnowledgeSidebar from "@/components/KnowledgeSidebar";
+import { Separator } from "@/components/ui/separator";
 
 export default function HomeInCall({ data }) {
+  const [play, setPlay] = useState(false);
   return (
     <>
-      <div className="flex flex-col gap-7 fixed top-10 right-10">
+      <div className="flex flex-col gap-4 fixed top-10 right-10 ">
         <Image
-          src={`/icons/pause.svg`}
+          src={`/icons/${play? "play": "pause"}.svg`}
           width={25}
           height={25}
           alt="pause"
           priority
+          onClick={() => setPlay(!play)}
           className="cursor-pointer"
         />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <Image
           src={`/icons/seek_back.svg`}
           width={30}
@@ -24,8 +29,11 @@ export default function HomeInCall({ data }) {
           priority
           className="cursor-pointer"
         />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <Sidebar />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <KnowledgeSidebar data={data} />
+        <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
         <div className="flex">
         <Image
           src={`/icons/cursor.svg`}

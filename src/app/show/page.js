@@ -16,6 +16,7 @@ import ChatPopover from "@/components/ChatPopover";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { useUser } from "@/lib/auth";
 import Spinner from "@/components/Spinner";
+import { Separator } from "@/components/ui/separator";
 
 const Show = () => {
   const router = useSearchParams();
@@ -25,6 +26,7 @@ const Show = () => {
   const [image, setImage] = useState(false);
   const [timer, setTimer] = useState(3);
   const [status, setStatus] = useState(0);
+  const [play, setPlay] = useState(false);
   const rout = useRouter();
   const user = useUser();
   
@@ -58,8 +60,9 @@ const Show = () => {
   }
   return (
     <div className="m-5 min-h-screen flex flex-col items-center">
-      <div className="flex flex-col gap-7 fixed top-10 right-10 z-50">
+      <div className="flex flex-col gap-7 fixed top-10 right-10 z-50 bg-white rounded-lg p-2">
         {video && volume ? (
+          <>
           <Image
             src={"/icons/volume.svg"}
             width={35}
@@ -68,19 +71,25 @@ const Show = () => {
             className="cursor-pointer"
             onClick={() => setVolume(!volume)}
           />
+          <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
+          </>
         ) : video ? (
+          <>
           <FontAwesomeIcon
             onClick={() => setVolume(!volume)}
             className="cursor-pointer"
             style={{ width: "35px", height: "30px" }}
             icon={faVolumeXmark}
           />
+          <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
+          </>
         ) : (
           <></>
         )}
         {video ? (
           <>
             <ChatAsk  postId={mode} />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <ChatPopover>
               <FontAwesomeIcon
                 className="cursor-pointer"
@@ -88,12 +97,14 @@ const Show = () => {
                 style={{ width: "35px", height: "30px" }}
               />
             </ChatPopover>
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <FontAwesomeIcon
               icon={faPhotoFilm}
               style={{ width: "35px", height: "30px" }}
               className="cursor-pointer"
               onClick={() => setVideo(false)}
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <FontAwesomeIcon
               icon={faHeart}
               style={{ width: "35px", height: "30px" }}
@@ -109,6 +120,7 @@ const Show = () => {
               alt="double tick"
               className="cursor-pointer"
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <Image
               src={"/icons/no.svg"}
               width={30}
@@ -119,13 +131,18 @@ const Show = () => {
           </>
         )}
         {!video && status == 0 ? (
+          <>
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
           <FontAwesomeIcon
             icon={faRecordVinyl}
             style={{ width: "35px", height: "30px" }}
             className="cursor-pointer"
             onClick={() => setStatus(1)}
           />
+          </>
         ) : !video && status == 1 ? (
+          <>
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
           <span className="countdown font-mono text-2xl">
             <span
               style={{
@@ -133,8 +150,10 @@ const Show = () => {
               }}
             ></span>
           </span>
+          </>
         ) : !video ? (
           <>
+          <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <Image
               src={"/icons/screen.svg"}
               width={30}
@@ -142,6 +161,7 @@ const Show = () => {
               alt="screen"
               className="cursor-pointer"
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <Image
               src={"/icons/camera.svg"}
               width={35}
@@ -153,6 +173,7 @@ const Show = () => {
                 setVideo(true);
               }}
             />
+            <Separator className="h-1 border-dashed border-black border-2 bg-transparent" />
             <Image
               src={"/icons/mic.svg"}
               width={35}
@@ -197,12 +218,13 @@ const Show = () => {
               border: "solid 1px #ddd",
               background: "#f0f0f0",
               pointerEvents: "all",
+              borderRadius: "30px"
             }}
             default={{
               x: 0,
-              y: window.innerHeight - 200,
-              width: 320,
-              height: 200,
+              y: window.innerHeight - 250,
+              width: 260,
+              height: 250,
             }}
           >
             <div className="flex flex-col justify-around items-center w-full h-full">
@@ -215,10 +237,11 @@ const Show = () => {
                     className="cursor-pointer"
                   />
                   <Image
-                    src={"/icons/pause.svg"}
+                    src={`/icons/${play? "play": "pause"}.svg`}
                     width={36}
                     height={36}
                     alt="camera"
+                    onClick={() => setPlay(!play)}
                     className="cursor-pointer"
                   />
                   <FontAwesomeIcon
@@ -227,6 +250,7 @@ const Show = () => {
                     className="cursor-pointer"
                   />
                 </div>
+                <Separator className="h-0 border-dashed border-black border-2 bg-transparent" />
                 <div className="flex justify-around items-center py-3 w-full">
                   <Image
                     src={"/icons/left.svg"}
